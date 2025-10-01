@@ -84,6 +84,6 @@ dependencies {
     //noinspection GradleDynamicVersion
     testImplementation 'junit:junit:4.13.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "com.facebook.react:react-android:${safeExtGet('reactNativeVersion', DEFAULT_REACT_NATIVE_VERSION)}"
+    implementation "com.facebook.react:react-native:${safeExtGet('reactNativeVersion', DEFAULT_REACT_NATIVE_VERSION)}"
 }
 
