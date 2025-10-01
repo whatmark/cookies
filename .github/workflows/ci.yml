@@ -34,20 +34,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java for Android SDK tools
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: 8
+          java-version: 17
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: Set up Android SDK
+      - name: Install Android SDK components
         uses: android-actions/setup-android@v3
         with:
           api-level: 29
           build-tools: 29.0.3
+
+      - name: Set up Java for Gradle
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 11
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
       - name: Grant execute permission for Gradle wrapper
         run: chmod +x gradlew
@@ -77,6 +83,6 @@ jobs:
             -project ios/RNCookieManagerIOS.xcodeproj \
             -scheme RNCookieManagerIOS \
             -sdk iphonesimulator \
-            -destination 'platform=iOS Simulator,name=iPhone 14' \
+            -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15' \
             test \
             CODE_SIGNING_ALLOWED=NO
