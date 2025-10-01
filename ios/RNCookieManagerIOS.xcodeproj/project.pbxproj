@@ -240,6 +240,10 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
 			};
 			name = Debug;
 		};
@@ -273,6 +277,10 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
 			};
 			name = Release;
 		};
@@ -293,6 +301,10 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
 			};
 			name = Debug;
 		};
@@ -313,6 +325,10 @@
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
 				DEFINES_MODULE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../node_modules/react-native/React/**",
+				);
 			};
 			name = Release;
 		};
