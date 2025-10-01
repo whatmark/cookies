@@ -62,7 +62,7 @@ jobs:
       - name: Run unit tests
         env:
           JAVA_TOOL_OPTIONS: -Xmx2g
-        run: ./gradlew test
+        run: ./gradlew test --stacktrace
         working-directory: android
 
   ios-tests:
