@@ -7,8 +7,19 @@
 
 import { NativeModules, Platform } from 'react-native';
 const invariant = require('invariant');
-const RNCookieManagerIOS = NativeModules.RNCookieManagerIOS;
-const RNCookieManagerAndroid = NativeModules.RNCookieManagerAndroid;
+const TurboModuleRegistry =
+  global.__turboModuleProxy != null
+    ? require('react-native').TurboModuleRegistry
+    : null;
+const isTurboModuleEnabled = TurboModuleRegistry != null;
+const RNCookieManagerIOS =
+  Platform.OS === 'ios' && isTurboModuleEnabled
+    ? TurboModuleRegistry.getEnforcing('RNCookieManagerIOS')
+    : NativeModules.RNCookieManagerIOS;
+const RNCookieManagerAndroid =
+  Platform.OS === 'android' && isTurboModuleEnabled
+    ? TurboModuleRegistry.getEnforcing('RNCookieManagerAndroid')
+    : NativeModules.RNCookieManagerAndroid;
 
 let CookieManager;
 

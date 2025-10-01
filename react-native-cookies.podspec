@@ -11,8 +11,13 @@ Pod::Spec.new do |s|
   s.author              = { package["author"]["name"] => package["author"]["email"] }
   s.source              = { :git => "git@github.com:react-native-community/cookies.git", :tag => "v#{s.version}" }
   s.requires_arc        = true
+  s.swift_version       = '5.0'
   s.platform            = :ios, "7.0"
   s.preserve_paths      = "*.framework"
-  s.source_files        = "ios/**/*.{h,m}"
+  s.source_files        = "ios/Shared/**/*.swift", "ios/Legacy/**/*.swift", "ios/NewArchitecture/**/*.{h,mm}"
   s.dependency "React-Core"
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
 end
+
+
+

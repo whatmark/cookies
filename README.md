@@ -8,6 +8,14 @@ Cookie Manager for React Native
 
 This module was ported from [joeferraro/react-native-cookies](https://github.com/joeferraro/react-native-cookies). This would not exist without the work of the original author, [Joe Ferraro](https://github.com/joeferraro).
 
+## What's new
+
+- ✅ iOS ネイティブ実装を Swift へ全面移行しました。`ios/Shared` にロジックを集約し、`ios/Legacy` / `ios/NewArchitecture` で旧アーキテクチャと TurboModule を切り替えます。Podspec はこれらのパスをビルド対象に含むよう更新されています。
+- ✅ Android も Kotlin 化し、従来の Java 実装で提供していた機能・例外処理をそのまま移植しています。TurboModule 対応のパッケージも Kotlin で提供します。
+- ✅ React Native 0.73 以降を前提とすることで、新アーキテクチャを既定で有効にした環境に合わせています。
+- ✅ GitHub Actions を導入し、Lint / Android 単体テスト / iOS シミュレータテストを自動実行できるようになりました。
+- ✅ Android/iOS 双方にユニットテストを追加し、ドメイン検証や Cookie 属性の保持など重要なケースを自動検証します。
+
 ## Important notices & Breaking Changes
 - **v6.0.0**: Package name updated to `@react-native-cookies/cookies`.
 - **v5.0.0**: Peer Dependency of >= React Native 0.60.2
@@ -17,12 +25,12 @@ This module was ported from [joeferraro/react-native-cookies](https://github.com
 
 ## Maintainers
 
-- [Jason Safaiyeh](https://github.com/safaiyeh) ([Twitter @safaiyeh](https://twitter.com/safaiyeh)) from [🪄 Magic Eden](https://magiceden.io)
+- [Jason Safaiyeh](https://github.com/safaiyeh) ([Twitter @safaiyeh](https://twitter.com/safaiyeh)) from [?? Magic Eden](https://magiceden.io)
 
 ## Platforms Supported
 
-- ✅ iOS
-- ✅ Android
+- ✅ iOS (Swift + TurboModule 対応)
+- ✅ Android (Kotlin + TurboModule 対応)
 - ❌ Currently lacking support for Windows, macOS, and web. Support for these platforms will be created when there is a need for them. Starts with a posted issue.
 
 ## Expo
@@ -41,6 +49,12 @@ Then link the native iOS package
 ```
 npx pod-install
 ```
+
+### Minimum Requirements
+
+- React Native >= **0.73** (New Architecture が標準有効のため)
+- Android Gradle Plugin 3.5.x ＋ Kotlin Gradle Plugin（ライブラリ側に組み込み済み）
+- iOS 11+（WebKit Cookie Store 対応）
 
 ## Usage
 
@@ -184,7 +198,7 @@ CookieManager.get('http://example.com', useWebKit)
 	});
 
 // set a cookie
-const newCookie: = {
+const newCookie = {
 	name: 'myCookie',
 	value: 'myValue',
 	domain: 'some domain',
@@ -198,3 +212,40 @@ CookieManager.set('http://example.com', newCookie, useWebKit)
 		console.log('CookieManager.set from webkit-view =>', res);
 	});
 ```
+
+## Development
+
+### Lint
+
+```
+yarn lint
+```
+
+### Android Unit Tests
+
+```
+(cd android && ./gradlew test)
+```
+
+### iOS Unit Tests
+
+```
+xcodebuild \
+  -project ios/RNCookieManagerIOS.xcodeproj \
+  -scheme RNCookieManagerIOS \
+  -sdk iphonesimulator \
+  -destination 'platform=iOS Simulator,name=iPhone 14' \
+  test \
+  CODE_SIGNING_ALLOWED=NO
+```
+
+### Continuous Integration
+
+GitHub Actions（`.github/workflows/ci.yml`）では以下を自動実行します。
+
+1. **Lint**: Node.js 18 + yarn で ESLint.
+2. **Android tests**: Java 11 + Gradle で `./gradlew test`.
+3. **iOS tests**: macOS 上で `xcodebuild test` (iPhone 14 シミュレータ).
+
+Pull Request 時にすべて成功していることを確認してください。
+

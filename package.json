@@ -42,7 +42,7 @@
     "invariant": "^2.2.4"
   },
   "peerDependencies": {
-    "react-native": ">= 0.60.2"
+    "react-native": ">= 0.73.0"
   },
   "devDependencies": {
     "@react-native-community/eslint-config": "^0.0.6",
