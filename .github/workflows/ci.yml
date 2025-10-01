@@ -86,3 +86,4 @@ jobs:
             -destination 'platform=iOS Simulator,OS=latest,name=iPhone 15' \
             test \
             CODE_SIGNING_ALLOWED=NO
+
