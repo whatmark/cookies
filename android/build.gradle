@@ -16,7 +16,7 @@ def DEFAULT_BUILD_TOOLS_VERSION = '29.0.3'
 def DEFAULT_MIN_SDK_VERSION = 21
 def DEFAULT_TARGET_SDK_VERSION = 29
 
-def DEFAULT_KOTLIN_VERSION = '1.6.21'
+def DEFAULT_KOTLIN_VERSION = '1.3.72'
 
 def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
@@ -85,3 +85,4 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'com.facebook.react:react-native:+'  // From node_modules
 }
+
